@@ -1,7 +1,7 @@
 {
   "name": "GymTracker Pro",
   "short_name": "GymTracker",
-  "description": "Sigue tu rutina de gym de 5 días",
+  "description": "Sigue tu rutina de gym de 5 dï¿½as",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f0f13",
