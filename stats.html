@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <title>Estad&iacute;sticas &ndash; GymTracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="screen active" style="min-height:100dvh;">
+
+    <header class="app-header">
+      <div class="header-left">
+        <a href="index.html" class="btn-icon-link" title="Volver">&#x2190;</a>
+        <span class="header-title">&#x1F4CA; Estad&iacute;sticas</span>
+      </div>
+      <div class="header-right">
+        <span id="statsUser" class="header-user"></span>
+      </div>
+    </header>
+
+    <div class="week-progress" style="padding-bottom:0.5rem;">
+      <p id="statsSubtitle" style="font-size:0.75rem;color:var(--text-secondary);text-align:center;padding-top:0.2rem;">
+        &Uacute;ltimas 8 semanas &middot; peso m&aacute;ximo por sesi&oacute;n
+      </p>
+    </div>
+
+    <nav class="day-tabs" id="statsTabs"></nav>
+
+    <main class="day-panels" id="statsContent"></main>
+
+  </div>
+
+  <script src="routine.js"></script>
+  <script src="stats.js"></script>
+</body>
+</html>

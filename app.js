@@ -8,78 +8,7 @@
      - Previous week data shown as hints
    ============================================== */
 
-/* ---- Routine data (Unicode escapes for non-ASCII) ---- */
-var ROUTINE = [
-  {
-    title:    'Lunes \u2013 PUSH',
-    tabLabel: 'LUN',
-    tabEmoji: '&#x1F7E6;',
-    desc:     'Pecho &middot; Hombro &middot; Tr\u00edceps',
-    exercises: [
-      { name: 'Press Banca',                sets: 4, badge: '4 &times; 5\u20138 reps',   yt: 'press+banca+tecnica+correcta' },
-      { name: 'Press Inclinado Mancuernas', sets: 3, badge: '3 &times; 8\u201310 reps',  yt: 'press+inclinado+mancuernas+tecnica' },
-      { name: 'Press Militar',              sets: 3, badge: '3 &times; 6\u201310 reps',  yt: 'press+militar+tecnica+barra' },
-      { name: 'Elevaciones Laterales',      sets: 3, badge: '3 &times; 12\u201315 reps', yt: 'elevaciones+laterales+hombro+tecnica' },
-      { name: 'Tr\u00edceps Polea Cuerda',  sets: 3, badge: '3 &times; 10\u201315 reps', yt: 'triceps+polea+cuerda+tecnica' }
-    ]
-  },
-  {
-    title:    'Martes \u2013 PULL',
-    tabLabel: 'MAR',
-    tabEmoji: '&#x1F7E9;',
-    desc:     'Espalda &middot; B\u00edceps',
-    exercises: [
-      { name: 'Dominadas / Jal\u00f3n', sets: 4, badge: '4 &times; 6\u201310 reps',  yt: 'dominadas+tecnica+correcta' },
-      { name: 'Remo con Barra',          sets: 3, badge: '3 &times; 6\u201310 reps',  yt: 'remo+con+barra+tecnica' },
-      { name: 'Jal\u00f3n al Pecho',     sets: 3, badge: '3 &times; 8\u201312 reps',  yt: 'jalon+al+pecho+tecnica+correcta' },
-      { name: 'Remo Polea',              sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'remo+polea+sentado+tecnica' },
-      { name: 'Curl B\u00edceps Barra',  sets: 3, badge: '3 &times; 8\u201312 reps',  yt: 'curl+biceps+barra+tecnica+correcta' }
-    ]
-  },
-  {
-    title:    'Mi\u00e9rcoles \u2013 LEGS',
-    tabLabel: 'MI\u00c9',
-    tabEmoji: '&#x1F7E8;',
-    desc:     'Pierna Completa',
-    exercises: [
-      { name: 'Sentadilla',                       sets: 4, badge: '4 &times; 5\u20138 reps',   yt: 'sentadilla+tecnica+correcta+principiantes' },
-      { name: 'Prensa',                           sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'prensa+de+piernas+tecnica+correcta' },
-      { name: 'Curl Femoral',                     sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'curl+femoral+maquina+tecnica' },
-      { name: 'Extensi\u00f3n Cu\u00e1driceps',   sets: 3, badge: '3 &times; 12\u201315 reps', yt: 'extension+cuadriceps+maquina+tecnica' },
-      { name: 'Zancadas / Step-ups',              sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'zancadas+step+ups+tecnica+pierna' }
-    ]
-  },
-  {
-    title:    'Jueves \u2013 UPPER',
-    tabLabel: 'JUE',
-    tabEmoji: '&#x1F7E5;',
-    desc:     'Torso Mixto Fuerza',
-    exercises: [
-      { name: 'Press Inclinado Barra',  sets: 3, badge: '3 &times; 6\u20138 reps',   yt: 'press+inclinado+barra+tecnica' },
-      { name: 'Remo Barra',             sets: 3, badge: '3 &times; 6\u20138 reps',   yt: 'remo+barra+pendlay+tecnica' },
-      { name: 'Fondos',                 sets: 3, badge: '3 &times; 8\u201312 reps',  yt: 'fondos+paralelas+tecnica+pecho+triceps' },
-      { name: 'Dominadas Supinas',      sets: 3, badge: '3 &times; 6\u201310 reps',  yt: 'dominadas+supinas+chin+up+tecnica' },
-      { name: 'Elevaciones Laterales',  sets: 3, badge: '3 &times; 12\u201315 reps', yt: 'elevaciones+laterales+hombro+tecnica' }
-    ]
-  },
-  {
-    title:    'Viernes \u2013 FULL BODY',
-    tabLabel: 'VIE',
-    tabEmoji: '&#x1F7EA;',
-    desc:     'Bombeo + Core',
-    exercises: [
-      { name: 'Prensa',                              sets: 3, badge: '3 &times; 10\u201315 reps', yt: 'prensa+de+piernas+tecnica+correcta' },
-      { name: 'Jal\u00f3n al Pecho',                sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'jalon+al+pecho+tecnica+correcta' },
-      { name: 'Press Pecho M\u00e1quina',           sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'press+pecho+maquina+tecnica' },
-      { name: 'Curl Mancuernas',                    sets: 3, badge: '3 &times; 10\u201312 reps', yt: 'curl+mancuernas+biceps+tecnica' },
-      { name: 'Core \u2013 Plancha + Elevaciones',  sets: 1, badge: '10 min &middot; circuito',  yt: 'rutina+core+plancha+elevacion+piernas+10+minutos', isCore: true }
-    ]
-  }
-];
-
-/* ---- JS day -> gym tab index (0=Mon...4=Fri, null=weekend) ---- */
-/* JS:  0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat         */
-var JS_TO_GYM = [null, 0, 1, 2, 3, 4, null];
+/* ROUTINE and JS_TO_GYM are defined in routine.js (loaded before this file) */
 
 var App = (function () {
 
@@ -189,41 +118,54 @@ var App = (function () {
     }).join('');
   }
 
-  function buildExCard(d, e, ex) {
-    var setsHtml = '';
-    for (var s = 0; s < ex.sets; s++) {
-      var id    = d + '-' + e + '-' + s;
-      var label = ex.isCore ? 'Tiempo' : ('Serie ' + (s + 1));
-      var wPh   = ex.isCore ? 'min'   : 'kg';
-      var rPh   = ex.isCore ? 'rondas': 'reps';
-      setsHtml +=
-        '<div class="set-row' + '" id="setrow-' + id + '">' +
-          '<span class="set-label">' + label + '</span>' +
-          '<div class="set-inputs">' +
-            '<input type="number" class="input-weight" placeholder="' + wPh + '" min="0" step="0.5"' +
-              ' oninput="App.saveSet(' + d + ',' + e + ',' + s + ',\'weight\',this.value)" />' +
-            '<input type="number" class="input-reps" placeholder="' + rPh + '" min="0"' +
-              ' oninput="App.saveSet(' + d + ',' + e + ',' + s + ',\'reps\',this.value)" />' +
-          '</div>' +
-          '<button id="setDone-' + id + '" class="btn-set-done"' +
-            ' onclick="App.toggleSetDone(' + d + ',' + e + ',' + s + ')" title="Marcar serie">' +
-            '&#x2713;</button>' +
+  function buildSetRowHtml(d, e, s, ex) {
+    var id    = d + '-' + e + '-' + s;
+    var label = ex.isCore ? 'Tiempo' : ('Serie ' + (s + 1));
+    var wPh   = ex.isCore ? 'min'   : 'kg';
+    var rPh   = ex.isCore ? 'rondas': 'reps';
+    return (
+      '<div class="set-row" id="setrow-' + id + '">' +
+        '<span class="set-label">' + label + '</span>' +
+        '<div class="set-inputs">' +
+          '<input type="number" class="input-weight" placeholder="' + wPh + '" min="0" step="0.5"' +
+            ' oninput="App.saveSet(' + d + ',' + e + ',' + s + ',\'weight\',this.value)" />' +
+          '<input type="number" class="input-reps" placeholder="' + rPh + '" min="0"' +
+            ' oninput="App.saveSet(' + d + ',' + e + ',' + s + ',\'reps\',this.value)" />' +
         '</div>' +
-        '<div class="set-prev-hint" id="prevhint-' + id + '"></div>';
+        '<button id="setDone-' + id + '" class="btn-set-done"' +
+          ' onclick="App.toggleSetDone(' + d + ',' + e + ',' + s + ')" title="Marcar serie">' +
+          '&#x2713;</button>' +
+      '</div>' +
+      '<div class="set-prev-hint" id="prevhint-' + id + '"></div>'
+    );
+  }
+
+  function buildExCard(d, e, ex) {
+    var count    = getSetCount(d, e);
+    var setsHtml = '';
+    for (var s = 0; s < count; s++) {
+      setsHtml += buildSetRowHtml(d, e, s, ex);
     }
 
     return '<div class="exercise-card" id="excard-' + d + '-' + e + '">' +
       '<div class="ex-header">' +
         '<div class="ex-info">' +
           '<h3 class="ex-name">' + ex.name + '</h3>' +
-          '<span class="ex-sets-reps">' + ex.badge + '</span>' +
         '</div>' +
         '<div class="ex-actions">' +
           '<a href="https://www.youtube.com/results?search_query=' + ex.yt + '"' +
             ' target="_blank" class="btn-video" rel="noopener noreferrer">&#x25B6; Ver</a>' +
         '</div>' +
       '</div>' +
-      '<div class="sets-grid">' + setsHtml + '</div>' +
+      '<div class="ex-set-ctrl-row">' +
+        '<span class="ex-sets-reps">' + ex.badge + '</span>' +
+        '<div class="set-count-ctrl">' +
+          '<button class="btn-set-cnt" onclick="App.changeSetCount(' + d + ',' + e + ',-1)">&#8722;</button>' +
+          '<span class="set-cnt-val" id="setcnt-' + d + '-' + e + '">' + count + ' series</span>' +
+          '<button class="btn-set-cnt" onclick="App.changeSetCount(' + d + ',' + e + ',1)">&#43;</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sets-grid" id="setsgrid-' + d + '-' + e + '">' + setsHtml + '</div>' +
       '<div class="ex-note">' +
         '<input type="text" class="input-note" placeholder="Nota (opcional)"' +
           ' id="note-' + d + '-' + e + '"' +
@@ -232,10 +174,70 @@ var App = (function () {
     '</div>';
   }
 
+  function changeSetCount(d, e, delta) {
+    var count = getSetCount(d, e);
+    count = Math.max(1, Math.min(10, count + delta));
+    saveSetCount(d, e, count);
+    var lbl = document.getElementById('setcnt-' + d + '-' + e);
+    if (lbl) lbl.textContent = count + ' series';
+    rebuildSetsGrid(d, e);
+  }
+
+  function rebuildSetsGrid(d, e) {
+    var ex    = ROUTINE[d].exercises[e];
+    var count = getSetCount(d, e);
+    var grid  = document.getElementById('setsgrid-' + d + '-' + e);
+    if (!grid) return;
+    var setsHtml = '';
+    for (var s = 0; s < count; s++) {
+      setsHtml += buildSetRowHtml(d, e, s, ex);
+    }
+    grid.innerHTML = setsHtml;
+    /* Restore saved data + prev hints */
+    var setsData = getSets();
+    var prevSets = getPrevSets();
+    for (var s = 0; s < count; s++) {
+      var k   = d + '_' + e + '_' + s;
+      var id  = d + '-' + e + '-' + s;
+      var row = document.getElementById('setrow-' + id);
+      var cur = setsData[k];
+      if (cur && row) {
+        var wIn = row.querySelector('.input-weight');
+        var rIn = row.querySelector('.input-reps');
+        if (wIn && cur.weight !== undefined && cur.weight !== '') wIn.value = cur.weight;
+        if (rIn && cur.reps   !== undefined && cur.reps   !== '') rIn.value = cur.reps;
+        applySetDone(d, e, s, !!cur.done);
+      } else {
+        var ph = prevSets[k];
+        if (ph && (ph.weight || ph.reps)) {
+          var hint = document.getElementById('prevhint-' + id);
+          if (hint) {
+            hint.textContent = 'Sem.ant: ' + (ph.weight || '-') + 'kg x ' + (ph.reps || '-') + ' reps';
+            hint.style.display = 'block';
+          }
+        }
+      }
+    }
+    checkAllSetsDone(d, e);
+  }
+
   /* ---- Data operations ---- */
   function getSets()     { return load(sk('sets'),    {}); }
   function getDayDone()  { return load(sk('daydone'), {}); }
   function getPrevSets() { return load(skw(prevWeekKey, 'sets'), {}); }
+
+  /* ---- Set count per exercise (persisted per week) ---- */
+  function getSetCount(d, e) {
+    var counts = load(sk('setcount'), {});
+    var k = d + '_' + e;
+    return (counts[k] !== undefined && +counts[k] > 0) ? +counts[k] : ROUTINE[d].exercises[e].sets;
+  }
+
+  function saveSetCount(d, e, count) {
+    var counts = load(sk('setcount'), {});
+    counts[d + '_' + e] = count;
+    save(sk('setcount'), counts);
+  }
 
   function saveSet(d, e, s, field, value) {
     var data = getSets();
@@ -266,10 +268,10 @@ var App = (function () {
   }
 
   function checkAllSetsDone(d, e) {
-    var data = getSets();
-    var ex   = ROUTINE[d].exercises[e];
-    var all  = true;
-    for (var s = 0; s < ex.sets; s++) {
+    var data  = getSets();
+    var count = getSetCount(d, e);
+    var all   = true;
+    for (var s = 0; s < count; s++) {
       var k = d + '_' + e + '_' + s;
       if (!data[k] || !data[k].done) { all = false; break; }
     }
@@ -305,10 +307,12 @@ var App = (function () {
 
   function resetWeek() {
     if (!confirm('Reiniciar semana actual? Se borran los datos de esta semana.')) return;
-    ['sets', 'notes', 'daydone'].forEach(function (s) {
+    ['sets', 'notes', 'daydone', 'setcount'].forEach(function (s) {
       localStorage.removeItem(sk(s));
     });
+    buildDOM();
     loadAllData();
+    autoOpenToday();
     updateWeekProgress();
     showToast('Semana reiniciada');
   }
@@ -428,14 +432,15 @@ var App = (function () {
 
   /* Public API */
   return {
-    login:         login,
-    logout:        logout,
-    switchDay:     switchDay,
-    saveSet:       saveSet,
-    saveNote:      saveNote,
-    toggleSetDone: toggleSetDone,
-    completeDay:   completeDay,
-    resetWeek:     resetWeek
+    login:           login,
+    logout:          logout,
+    switchDay:       switchDay,
+    saveSet:         saveSet,
+    saveNote:        saveNote,
+    toggleSetDone:   toggleSetDone,
+    completeDay:     completeDay,
+    resetWeek:       resetWeek,
+    changeSetCount:  changeSetCount
   };
 
 }());

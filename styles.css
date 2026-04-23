@@ -742,3 +742,187 @@ body {
   border-radius: 4px;
   border-left: 2px solid var(--accent-yellow);
 }
+
+/* ===================================
+   SET COUNT CONTROL
+   =================================== */
+.ex-set-ctrl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.set-count-ctrl {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.btn-set-cnt {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-set-cnt:hover {
+  background: rgba(79, 158, 255, 0.15);
+  color: var(--accent-blue);
+}
+
+.btn-set-cnt:active {
+  background: rgba(79, 158, 255, 0.28);
+}
+
+.set-cnt-val {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 52px;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 0.3rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===================================
+   NAV LINK BUTTON (header icon-links)
+   =================================== */
+.btn-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color var(--transition), background var(--transition);
+  line-height: 1;
+}
+
+.btn-icon-link:hover {
+  color: var(--accent-blue);
+  background: rgba(79, 158, 255, 0.1);
+}
+
+/* ===================================
+   STATISTICS PAGE
+   =================================== */
+.stats-list {
+  gap: 0.875rem;
+}
+
+.stats-ex-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.875rem 1rem 0.6rem;
+  transition: border-color var(--transition);
+}
+
+.stats-ex-card:hover {
+  border-color: var(--border-light);
+}
+
+.stats-ex-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.stats-ex-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.trend {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.trend.up {
+  color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.12);
+}
+
+.trend.down {
+  color: var(--accent-red);
+  background: rgba(248, 113, 113, 0.12);
+}
+
+.trend.eq {
+  color: var(--text-muted);
+  background: rgba(71, 85, 105, 0.2);
+}
+
+.stats-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--accent-blue);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-dot {
+  fill: var(--accent-blue);
+  stroke: var(--bg-card);
+  stroke-width: 2;
+}
+
+.chart-label {
+  font-size: 9px;
+  fill: var(--text-muted);
+  font-family: var(--font);
+}
+
+.chart-val {
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--accent-blue);
+  font-family: var(--font);
+}
+
+.no-data {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 1.2rem 0 0.6rem;
+  font-style: italic;
+}
