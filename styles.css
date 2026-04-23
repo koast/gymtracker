@@ -531,9 +531,15 @@ body {
 
 .set-row {
   display: grid;
-  grid-template-columns: 60px 1fr 1fr;
+  grid-template-columns: 60px 1fr 36px;
   gap: 0.5rem;
   align-items: center;
+}
+
+.set-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
 }
 
 .set-label {
@@ -664,7 +670,7 @@ body {
   }
 
   .set-row {
-    grid-template-columns: 70px 120px 120px;
+    grid-template-columns: 70px 1fr 36px;
   }
 
   .exercises-list {
@@ -687,4 +693,52 @@ body {
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
   }
+}
+
+/* ===================================
+   SET DONE BUTTON + PREV WEEK HINT
+   =================================== */
+.btn-set-done {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.btn-set-done.done {
+  background: rgba(74, 222, 128, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.btn-set-done:active {
+  transform: scale(0.88);
+}
+
+.set-completed .input-weight,
+.set-completed .input-reps {
+  border-color: rgba(74, 222, 128, 0.3);
+  background: rgba(74, 222, 128, 0.04);
+}
+
+.set-prev-hint {
+  display: none;
+  font-size: 0.68rem;
+  color: var(--accent-yellow);
+  padding: 0.12rem 0.5rem;
+  margin-top: -0.25rem;
+  margin-left: 65px;
+  margin-bottom: 0.1rem;
+  background: rgba(250, 204, 21, 0.07);
+  border-radius: 4px;
+  border-left: 2px solid var(--accent-yellow);
 }

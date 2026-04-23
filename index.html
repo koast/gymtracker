@@ -10,6 +10,72 @@
 </head>
 <body>
 
+  <!-- LOGIN -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-container">
+      <div class="logo">&#x1F4AA;</div>
+      <h1 class="app-title">GymTracker</h1>
+      <p class="app-subtitle">Tu rutina. Tu progreso.</p>
+      <div class="login-form">
+        <input type="text" id="usernameInput" placeholder="Tu nombre de usuario"
+               maxlength="20" autocomplete="off" />
+        <button class="btn-primary" onclick="App.login()">Entrar</button>
+      </div>
+      <p class="login-hint">Los datos se guardan en este dispositivo</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="appScreen" class="screen">
+
+    <header class="app-header">
+      <div class="header-left">
+        <span class="header-logo">&#x1F4AA;</span>
+        <span class="header-title">GymTracker</span>
+      </div>
+      <div class="header-right">
+        <span id="headerUser" class="header-user"></span>
+        <button class="btn-icon" onclick="App.logout()" title="Cerrar sesion">&#x23FB;</button>
+      </div>
+    </header>
+
+    <div class="week-progress">
+      <div class="week-progress-label">
+        <span id="weekLabel">Semana actual</span>
+        <span id="weekProgressText">0/5 dias</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="weekProgressFill"></div>
+      </div>
+    </div>
+
+    <nav class="day-tabs" id="dayTabs"></nav>
+
+    <main class="day-panels" id="dayPanels"></main>
+
+    <div class="week-footer">
+      <button class="btn-reset" onclick="App.resetWeek()">&#x1F504; Nueva semana</button>
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <title>GymTracker Pro</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
   <!-- LOGIN SCREEN -->
   <div id="loginScreen" class="screen active">
     <div class="login-container">
