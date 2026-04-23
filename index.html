@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f0f" />
+  <title>GymTracker Pro</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-container">
+      <div class="logo">??</div>
+      <h1 class="app-title">GymTracker</h1>
+      <p class="app-subtitle">Tu rutina. Tu progreso.</p>
+      <div class="login-form">
+        <input type="text" id="usernameInput" placeholder="Tu nombre de usuario" maxlength="20" autocomplete="off" />
+        <button class="btn-primary" onclick="App.login()">Entrar</button>
+      </div>
+      <p class="login-hint">Los datos se guardan en este dispositivo</p>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="appScreen" class="screen">
+
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="header-left">
+        <span class="header-logo">??</span>
+        <span class="header-title">GymTracker</span>
+      </div>
+      <div class="header-right">
+        <span id="headerUser" class="header-user"></span>
+        <button class="btn-icon" onclick="App.logout()" title="Cerrar sesión">?</button>
+      </div>
+    </header>
+
+    <!-- WEEK PROGRESS BAR -->
+    <div class="week-progress">
+      <div class="week-progress-label">
+        <span>Semana actual</span>
+        <span id="weekProgressText">0/5 días</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="weekProgressFill"></div>
+      </div>
+    </div>
+
+    <!-- DAY TABS -->
+    <nav class="day-tabs">
+      <button class="tab-btn active" data-day="0" onclick="App.switchDay(0)">
+        <span class="tab-emoji">??</span>
+        <span class="tab-label">LUN</span>
+      </button>
+      <button class="tab-btn" data-day="1" onclick="App.switchDay(1)">
+        <span class="tab-emoji">??</span>
+        <span class="tab-label">MAR</span>
+      </button>
+      <button class="tab-btn" data-day="2" onclick="App.switchDay(2)">
+        <span class="tab-emoji">??</span>
+        <span class="tab-label">MIÉ</span>
+      </button>
+      <button class="tab-btn" data-day="3" onclick="App.switchDay(3)">
+        <span class="tab-emoji">??</span>
+        <span class="tab-label">JUE</span>
+      </button>
+      <button class="tab-btn" data-day="4" onclick="App.switchDay(4)">
+        <span class="tab-emoji">??</span>
+        <span class="tab-label">VIE</span>
+      </button>
+    </nav>
+
+    <!-- DAY PANELS -->
+    <main class="day-panels">
+
+      <!-- LUNES -->
+      <div class="day-panel active" id="panel-0">
+        <div class="day-header">
+          <h2>?? Lunes ? PUSH</h2>
+          <p class="day-desc">Pecho · Hombro · Tríceps</p>
+          <button class="btn-complete-day" onclick="App.completeDay(0)">
+            <span id="dayStatus-0">Marcar día completado ?</span>
+          </button>
+        </div>
+
+        <div class="exercises-list" id="exercises-0">
+
+          <div class="exercise-card" data-day="0" data-ex="0">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Press Banca</h3>
+                <span class="ex-sets-reps">4 × 5?8 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=press+banca+tecnica+correcta" target="_blank" class="btn-video" title="Ver técnica">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(0,0)"><span id="exDone-0-0">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid" id="sets-0-0">
+              <div class="set-row">
+                <span class="set-label">Serie 1</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,0,0,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,0,0,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 2</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,0,1,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,0,1,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 3</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,0,2,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,0,2,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 4</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,0,3,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,0,3,'reps',this.value)" />
+              </div>
+            </div>
+            <div class="ex-note">
+              <input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(0,0,this.value)" />
+            </div>
+          </div>
+
+          <div class="exercise-card" data-day="0" data-ex="1">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Press Inclinado Mancuernas</h3>
+                <span class="ex-sets-reps">3 × 8?10 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=press+inclinado+mancuernas+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(0,1)"><span id="exDone-0-1">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid" id="sets-0-1">
+              <div class="set-row">
+                <span class="set-label">Serie 1</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,1,0,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,1,0,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 2</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,1,1,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,1,1,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 3</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,1,2,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,1,2,'reps',this.value)" />
+              </div>
+            </div>
+            <div class="ex-note">
+              <input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(0,1,this.value)" />
+            </div>
+          </div>
+
+          <div class="exercise-card" data-day="0" data-ex="2">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Press Militar</h3>
+                <span class="ex-sets-reps">3 × 6?10 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=press+militar+tecnica+barra" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(0,2)"><span id="exDone-0-2">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row">
+                <span class="set-label">Serie 1</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,2,0,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,2,0,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 2</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,2,1,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,2,1,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 3</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,2,2,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,2,2,'reps',this.value)" />
+              </div>
+            </div>
+            <div class="ex-note">
+              <input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(0,2,this.value)" />
+            </div>
+          </div>
+
+          <div class="exercise-card" data-day="0" data-ex="3">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Elevaciones Laterales</h3>
+                <span class="ex-sets-reps">3 × 12?15 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=elevaciones+laterales+hombro+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(0,3)"><span id="exDone-0-3">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row">
+                <span class="set-label">Serie 1</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,3,0,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,3,0,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 2</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,3,1,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,3,1,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 3</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,3,2,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,3,2,'reps',this.value)" />
+              </div>
+            </div>
+            <div class="ex-note">
+              <input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(0,3,this.value)" />
+            </div>
+          </div>
+
+          <div class="exercise-card" data-day="0" data-ex="4">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Tríceps Polea Cuerda</h3>
+                <span class="ex-sets-reps">3 × 10?15 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=triceps+polea+cuerda+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(0,4)"><span id="exDone-0-4">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row">
+                <span class="set-label">Serie 1</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,4,0,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,4,0,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 2</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,4,1,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,4,1,'reps',this.value)" />
+              </div>
+              <div class="set-row">
+                <span class="set-label">Serie 3</span>
+                <input type="number" class="input-weight" placeholder="kg" min="0" step="0.5" oninput="App.saveSet(0,4,2,'weight',this.value)" />
+                <input type="number" class="input-reps" placeholder="reps" min="0" oninput="App.saveSet(0,4,2,'reps',this.value)" />
+              </div>
+            </div>
+            <div class="ex-note">
+              <input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(0,4,this.value)" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MARTES -->
+      <div class="day-panel" id="panel-1">
+        <div class="day-header">
+          <h2>?? Martes ? PULL</h2>
+          <p class="day-desc">Espalda · Bíceps</p>
+          <button class="btn-complete-day" onclick="App.completeDay(1)">
+            <span id="dayStatus-1">Marcar día completado ?</span>
+          </button>
+        </div>
+        <div class="exercises-list" id="exercises-1">
+
+          <div class="exercise-card" data-day="1" data-ex="0">
+            <div class="ex-header">
+              <div class="ex-info">
+                <h3 class="ex-name">Dominadas / Jalón</h3>
+                <span class="ex-sets-reps">4 × 6?10 reps</span>
+              </div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=dominadas+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(1,0)"><span id="exDone-1-0">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,0,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,0,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,0,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,0,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,0,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,0,2,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 4</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,0,3,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,0,3,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(1,0,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="1" data-ex="1">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Remo con Barra</h3><span class="ex-sets-reps">3 × 6?10 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=remo+con+barra+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(1,1)"><span id="exDone-1-1">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,1,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,1,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,1,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,1,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,1,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,1,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(1,1,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="1" data-ex="2">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Jalón al Pecho</h3><span class="ex-sets-reps">3 × 8?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=jalon+al+pecho+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(1,2)"><span id="exDone-1-2">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,2,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,2,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,2,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,2,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,2,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,2,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(1,2,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="1" data-ex="3">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Remo Polea</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=remo+polea+sentado+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(1,3)"><span id="exDone-1-3">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,3,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,3,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,3,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,3,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,3,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,3,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(1,3,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="1" data-ex="4">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Curl Bíceps Barra</h3><span class="ex-sets-reps">3 × 8?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=curl+biceps+barra+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(1,4)"><span id="exDone-1-4">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,4,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,4,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,4,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,4,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(1,4,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(1,4,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(1,4,this.value)" /></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MIERCOLES -->
+      <div class="day-panel" id="panel-2">
+        <div class="day-header">
+          <h2>?? Miércoles ? LEGS</h2>
+          <p class="day-desc">Pierna Completa</p>
+          <button class="btn-complete-day" onclick="App.completeDay(2)">
+            <span id="dayStatus-2">Marcar día completado ?</span>
+          </button>
+        </div>
+        <div class="exercises-list" id="exercises-2">
+
+          <div class="exercise-card" data-day="2" data-ex="0">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Sentadilla</h3><span class="ex-sets-reps">4 × 5?8 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=sentadilla+tecnica+correcta+principiantes" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(2,0)"><span id="exDone-2-0">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,0,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,0,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,0,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,0,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,0,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,0,2,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 4</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,0,3,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,0,3,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(2,0,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="2" data-ex="1">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Prensa</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=prensa+de+piernas+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(2,1)"><span id="exDone-2-1">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,1,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,1,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,1,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,1,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,1,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,1,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(2,1,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="2" data-ex="2">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Curl Femoral</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=curl+femoral+maquina+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(2,2)"><span id="exDone-2-2">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,2,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,2,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,2,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,2,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,2,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,2,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(2,2,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="2" data-ex="3">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Extensión Cuádriceps</h3><span class="ex-sets-reps">3 × 12?15 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=extension+cuadriceps+maquina+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(2,3)"><span id="exDone-2-3">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,3,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,3,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,3,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,3,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,3,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,3,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(2,3,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="2" data-ex="4">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Zancadas / Step-ups</h3><span class="ex-sets-reps">2?3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=zancadas+step+ups+tecnica+pierna" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(2,4)"><span id="exDone-2-4">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,4,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,4,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,4,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,4,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(2,4,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(2,4,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(2,4,this.value)" /></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- JUEVES -->
+      <div class="day-panel" id="panel-3">
+        <div class="day-header">
+          <h2>?? Jueves ? UPPER</h2>
+          <p class="day-desc">Torso Mixto Fuerza</p>
+          <button class="btn-complete-day" onclick="App.completeDay(3)">
+            <span id="dayStatus-3">Marcar día completado ?</span>
+          </button>
+        </div>
+        <div class="exercises-list" id="exercises-3">
+
+          <div class="exercise-card" data-day="3" data-ex="0">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Press Inclinado Barra</h3><span class="ex-sets-reps">3 × 6?8 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=press+inclinado+barra+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(3,0)"><span id="exDone-3-0">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,0,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,0,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,0,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,0,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,0,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,0,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(3,0,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="3" data-ex="1">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Remo Barra</h3><span class="ex-sets-reps">3 × 6?8 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=remo+barra+pendlay+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(3,1)"><span id="exDone-3-1">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,1,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,1,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,1,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,1,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,1,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,1,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(3,1,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="3" data-ex="2">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Fondos</h3><span class="ex-sets-reps">3 × 8?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=fondos+paralelas+tecnica+pecho+triceps" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(3,2)"><span id="exDone-3-2">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,2,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,2,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,2,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,2,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,2,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,2,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(3,2,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="3" data-ex="3">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Dominadas Supinas</h3><span class="ex-sets-reps">3 × 6?10 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=dominadas+supinas+chin+up+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(3,3)"><span id="exDone-3-3">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,3,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,3,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,3,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,3,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,3,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,3,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(3,3,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="3" data-ex="4">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Elevaciones Laterales</h3><span class="ex-sets-reps">2?3 × 12?15 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=elevaciones+laterales+hombro+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(3,4)"><span id="exDone-3-4">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,4,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,4,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,4,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,4,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(3,4,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(3,4,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(3,4,this.value)" /></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIERNES -->
+      <div class="day-panel" id="panel-4">
+        <div class="day-header">
+          <h2>?? Viernes ? FULL BODY</h2>
+          <p class="day-desc">Bombeo + Core</p>
+          <button class="btn-complete-day" onclick="App.completeDay(4)">
+            <span id="dayStatus-4">Marcar día completado ?</span>
+          </button>
+        </div>
+        <div class="exercises-list" id="exercises-4">
+
+          <div class="exercise-card" data-day="4" data-ex="0">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Prensa</h3><span class="ex-sets-reps">3 × 10?15 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=prensa+de+piernas+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(4,0)"><span id="exDone-4-0">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,0,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,0,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,0,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,0,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,0,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,0,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(4,0,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="4" data-ex="1">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Jalón al Pecho</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=jalon+al+pecho+tecnica+correcta" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(4,1)"><span id="exDone-4-1">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,1,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,1,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,1,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,1,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,1,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,1,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(4,1,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="4" data-ex="2">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Press Pecho Máquina</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=press+pecho+maquina+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(4,2)"><span id="exDone-4-2">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,2,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,2,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,2,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,2,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,2,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,2,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(4,2,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="4" data-ex="3">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Curl Mancuernas</h3><span class="ex-sets-reps">3 × 10?12 reps</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=curl+mancuernas+biceps+tecnica" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(4,3)"><span id="exDone-4-3">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Serie 1</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,3,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,3,0,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 2</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,3,1,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,3,1,'reps',this.value)" /></div>
+              <div class="set-row"><span class="set-label">Serie 3</span><input type="number" class="input-weight" placeholder="kg" step="0.5" oninput="App.saveSet(4,3,2,'weight',this.value)" /><input type="number" class="input-reps" placeholder="reps" oninput="App.saveSet(4,3,2,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(4,3,this.value)" /></div>
+          </div>
+
+          <div class="exercise-card" data-day="4" data-ex="4">
+            <div class="ex-header">
+              <div class="ex-info"><h3 class="ex-name">Core ? Plancha + Elevaciones</h3><span class="ex-sets-reps">10 min · circuito</span></div>
+              <div class="ex-actions">
+                <a href="https://www.youtube.com/results?search_query=rutina+core+plancha+elevacion+piernas+10+minutos" target="_blank" class="btn-video">? Ver</a>
+                <button class="btn-done" onclick="App.toggleExDone(4,4)"><span id="exDone-4-4">?</span></button>
+              </div>
+            </div>
+            <div class="sets-grid">
+              <div class="set-row"><span class="set-label">Tiempo</span><input type="number" class="input-weight" placeholder="min" step="1" oninput="App.saveSet(4,4,0,'weight',this.value)" /><input type="number" class="input-reps" placeholder="rondas" oninput="App.saveSet(4,4,0,'reps',this.value)" /></div>
+            </div>
+            <div class="ex-note"><input type="text" class="input-note" placeholder="Nota (opcional)" oninput="App.saveNote(4,4,this.value)" /></div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- RESET WEEK BUTTON -->
+    <div class="week-footer">
+      <button class="btn-reset" onclick="App.resetWeek()">?? Nueva semana</button>
+    </div>
+
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
