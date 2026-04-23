@@ -32,7 +32,7 @@ const App = (() => {
   // ??? User / Login ???
   function login() {
     const input = document.getElementById('usernameInput');
-    const name  = (input.value || '').trim().replace(/[^a-zA-Z0-9_áéíóúÁÉÍÓÚñÑ\s]/g, '');
+    const name  = (input.value || '').trim().replace(/[^a-zA-Z0-9_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\s]/g, '');
     if (!name) {
       showToast('Introduce tu nombre de usuario');
       input.focus();
@@ -78,7 +78,7 @@ const App = (() => {
   }
 
   function resetWeek() {
-    if (!confirm('¿Reiniciar semana? Se borrarán todos los pesos, reps y estados de esta semana.')) return;
+    if (!confirm('ï¿½Reiniciar semana? Se borrarï¿½n todos los pesos, reps y estados de esta semana.')) return;
     const keys = [
       storageKey('sets'),
       storageKey('notes'),
@@ -126,7 +126,7 @@ const App = (() => {
     save(storageKey('daydone'), data);
     renderDayStatus(dayIdx, data[dayIdx]);
     updateWeekProgress();
-    if (data[dayIdx]) showToast('?? ¡Día completado! Buen trabajo');
+    if (data[dayIdx]) showToast('?? ï¿½Dï¿½a completado! Buen trabajo');
   }
 
   // ??? Render state ???
@@ -143,7 +143,7 @@ const App = (() => {
     const span  = document.getElementById(`dayStatus-${dayIdx}`);
     const btn   = span ? span.closest('.btn-complete-day') : null;
     const tab   = document.querySelector(`.tab-btn[data-day="${dayIdx}"]`);
-    if (span) span.textContent = done ? '? Día completado' : 'Marcar día completado ?';
+    if (span) span.textContent = done ? '? Dï¿½a completado' : 'Marcar dï¿½a completado ?';
     if (btn)  btn.classList.toggle('completed', done);
     if (tab)  tab.classList.toggle('day-done', done);
   }
@@ -200,7 +200,7 @@ const App = (() => {
     const fill      = document.getElementById('weekProgressFill');
     const text      = document.getElementById('weekProgressText');
     if (fill) fill.style.width = pct + '%';
-    if (text) text.textContent = `${completed}/5 días`;
+    if (text) text.textContent = `${completed}/5 dï¿½as`;
   }
 
   // ??? Day tab switching ???
